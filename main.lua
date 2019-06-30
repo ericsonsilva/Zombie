@@ -36,6 +36,12 @@ function love.update(dt)
   if love.keyboard.isDown("d") then
     player.x = player.x + player.speed * dt
   end
+--faz os zumbis andarem até o jogador, calculando o angulo onde o jogador está.
+-- Usamos COS = cosseno e SIN = seno.
+  for i,z in ipairs(zombies) do
+    z.x = z.x + math.cos(zombie_player_angle(z)) * z.speed * dt
+    z.y = z.y + math.sin(zombie_player_angle(z)) * z.speed * dt
+  end
 end
 
 function love.draw()
@@ -70,4 +76,9 @@ function love.keypressed(key, scancode, isrepeat)
   if key == "space" then
     spawnZombie()
   end
+end
+
+-- Fórmula de cálculo de ditancia entre 2 objetos.
+function distanceBetween(x1, y1, x2, y2)
+  return math.sqrt((y2 - y1)^2 + (x2 - x1)^2)
 end
