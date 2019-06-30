@@ -1,5 +1,5 @@
 function love.load()
---cria tabelhas de spriotes.
+--cria tabelhas de spriotes.--
   sprites = {}
 --para caminha de arquivos usar aspas simples.
   sprites.player = love.graphics.newImage('sprites/player.png')
