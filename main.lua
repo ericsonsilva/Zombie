@@ -37,6 +37,12 @@ end
 
 function love.draw()
 --desenha objetos na tela.
+-- nil retorna valor nulo ou default para o parâmetro.
+--getWidth e getHeight /2 mudam a referência do sprite pora o centro da imagem.
     love.graphics.draw(sprites.background, 0, 0)
-    love.graphics.draw(sprites.player, player.x, player.y)
+    love.graphics.draw(sprites.player, player.x, player.y, player_mouse_angle(), nil, nil, sprites.player:getWidth()/2, sprites.player:getHeight()/2)
+end
+-- Função para girar o player em direção ao mouse. math.pi compensa a inverção de vamores em lovo.
+function player_mouse_angle()
+  return math.atan2(player.y - love.mouse.getY(), player.x - love.mouse.getX()) + math.pi
 end
