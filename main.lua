@@ -41,6 +41,12 @@ function love.update(dt)
   for i,z in ipairs(zombies) do
     z.x = z.x + math.cos(zombie_player_angle(z)) * z.speed * dt
     z.y = z.y + math.sin(zombie_player_angle(z)) * z.speed * dt
+
+    if distanceBetween(z.x, z.y, player.x, player.y) < 30 then
+      for i,z in ipairs(zombies) do
+        zombies[i] = nil
+      end
+    end
   end
 end
 
