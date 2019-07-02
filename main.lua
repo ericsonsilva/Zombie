@@ -137,7 +137,7 @@ love.graphics.setFont(myFont)
     end
 --desenha bala na tela
     for i,b in ipairs(bullets) do
-      love.graphics.draw(sprites.bullet, b.x, b.y, nil, 0.5, 0.5, sprites.bullet:getWidth()/2, sprites.bullet:getHeight()/2)
+      love.graphics.draw(sprites.bullet, b.x, b.y, nil, 0.8, 0.8, sprites.bullet:getWidth()/2, sprites.bullet:getHeight()/2)
     end
 end
 -- Função para girar o player em direção ao mouse. math.pi compensa a inverção de vamores em lovo.
