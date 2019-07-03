@@ -5,7 +5,7 @@ function love.load()
   sprites.player = love.graphics.newImage('sprites/player.png')
   sprites.bullet = love.graphics.newImage('sprites/bullet.png')
   sprites.zombie = love.graphics.newImage('sprites/zombie.png')
-  sprites.background = love.graphics.newImage('sprites/background.png')
+  sprites.background = love.graphics.newImage('sprites/background2.png')
 -- tabela para movimento do plaer.
   player = {}
   player.x = love.graphics.getWidth()/2
