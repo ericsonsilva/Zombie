@@ -22,6 +22,8 @@ function love.load()
   myFont = love.graphics.newFont(30)
 
   score = 0
+
+  pausa = 1
 end
 
 function love.update(dt)
@@ -29,23 +31,23 @@ function love.update(dt)
 -- DT define a contagem de segundos. Mutiplicando por DT
 -- garatimos que o jogo rodará sempre com a mesma velocidade,
 -- mesmo que os frames dropem.
-if gameState == 2 then
-  if love.keyboard.isDown("s") and player.y < love.graphics.getHeight() then
-      player.y = player.y + player.speed * dt
-    end
+  if gameState == 2 then
+    if love.keyboard.isDown("s") and player.y < love.graphics.getHeight() then
+        player.y = player.y + player.speed * dt
+      end
 
-    if love.keyboard.isDown("w") and player.y > 0 then
-      player.y = player.y - player.speed * dt
-    end
+      if love.keyboard.isDown("w") and player.y > 0 then
+        player.y = player.y - player.speed * dt
+      end
 
-    if love.keyboard.isDown("a") and player.x > 0 then
-      player.x = player.x - player.speed * dt
-    end
+      if love.keyboard.isDown("a") and player.x > 0 then
+        player.x = player.x - player.speed * dt
+      end
 
-    if love.keyboard.isDown("d") and player.x < love.graphics.getWidth() then
-      player.x = player.x + player.speed * dt
+      if love.keyboard.isDown("d") and player.x < love.graphics.getWidth() then
+        player.x = player.x + player.speed * dt
+      end
     end
-  end
 --faz os zumbis andarem até o jogador, calculando o angulo onde o jogador está.
 -- Usamos COS = cosseno e SIN = seno.
   for i,z in ipairs(zombies) do
@@ -98,11 +100,15 @@ if gameState == 2 then
     end
   end
 
+  if gameState == 1 then
+    pausa = pausa - dt
+  end
+
   if gameState == 2 then
     timer = timer - dt
     if timer <= 0 then
       spawnZombie()
-      maxTime = maxTime * 0.95
+      maxTime = maxTime * 0.96
       timer = maxTime
     end
   end
@@ -114,7 +120,10 @@ function love.draw()
 --getWidth e getHeight /2 mudam a referência do sprite pora o centro da imagem.
     love.graphics.draw(sprites.background, 0, 0)
 
-    if gameState == 1 then
+love.graphics.setFont(myFont)
+--    love.graphics.print(math.ceil(pausa), 0, 50)
+
+    if gameState == 1 and pausa <= 0 then
       love.graphics.setFont(myFont)
       love.graphics.printf("Clique para começar!", 0, 50, love.graphics.getWidth(), "center")
     end
@@ -128,7 +137,7 @@ function love.draw()
     end
 --desenha bala na tela
     for i,b in ipairs(bullets) do
-      love.graphics.draw(sprites.bullet, b.x, b.y, nil, 0.5, 0.5, sprites.bullet:getWidth()/2, sprites.bullet:getHeight()/2)
+      love.graphics.draw(sprites.bullet, b.x, b.y, nil, 0.8, 0.8, sprites.bullet:getWidth()/2, sprites.bullet:getHeight()/2)
     end
 end
 -- Função para girar o player em direção ao mouse. math.pi compensa a inverção de vamores em lovo.
@@ -175,23 +184,25 @@ function spawnBullets()
   bullet.dead = false
   table.insert(bullets, bullet)
 end
-
+--[[
 function love.keypressed(key, scancode, isrepeat)
   if key == "space" then
     spawnZombie()
   end
 end
+]]
 --detecta que o botão esquedo do mouse foi apertado
 function love.mousepressed(x, y, button, isTouch)
   if button == 1 and gameState ==2 then
     spawnBullets()
   end
 
-  if gameState == 1 then
-    gameState = 2
-    maxTime = 2
-    timer = maxTime
-    score = 0
+  if gameState == 1 and pausa <= 0 then
+      gameState = 2
+      maxTime = 2
+      timer = maxTime
+      score = 0
+      pausa = 1
   end
 end
 
