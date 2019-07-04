@@ -1,7 +1,7 @@
 function love.load()
   love.window.setTitle("Zombie")
   love.window.setMode(600, 600)
---cria tabelhas de spriotes.--
+--cria tabelhas de spriotes.----
   sprites = {}
 --para caminha de arquivos usar aspas simples.
   sprites.player = love.graphics.newImage('sprites/player.png')
