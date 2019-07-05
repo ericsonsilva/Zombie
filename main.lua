@@ -1,5 +1,7 @@
 function love.load()
---cria tabelhas de spriotes.--
+  love.window.setTitle("Zombie")
+  love.window.setMode(600, 600)
+--cria tabelhas de spriotes.----
   sprites = {}
 --para caminha de arquivos usar aspas simples.
   sprites.player = love.graphics.newImage('sprites/player.png')
@@ -120,7 +122,7 @@ function love.draw()
 --getWidth e getHeight /2 mudam a referência do sprite pora o centro da imagem.
     love.graphics.draw(sprites.background, 0, 0)
 
-love.graphics.setFont(myFont)
+    love.graphics.setFont(myFont)
 --    love.graphics.print(math.ceil(pausa), 0, 50)
 
     if gameState == 1 and pausa <= 0 then
