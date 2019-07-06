@@ -121,6 +121,7 @@ function love.draw()
 -- nil retorna valor nulo ou default para o parâmetro.
 --getWidth e getHeight /2 mudam a referência do sprite pora o centro da imagem.
     love.graphics.draw(sprites.background, 0, 0)
+    love.graphics.setColor(1, 1, 1)
 
     love.graphics.setFont(myFont)
 --    love.graphics.print(math.ceil(pausa), 0, 50)
